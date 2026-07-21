@@ -139,7 +139,7 @@ if uploaded_file is not None:
     # Drop any rows where lat, lon, or value is NaN so all arrays keep matching lengths
     df_clean = df_clean.dropna(subset=[lat_col, lon_col, value_col]).copy()
 
-    if st.button("Generate Final PMD Reference Map"):
+    if st.button("Generate Final PMD Reference Map", key="btn_generate_map"):
         with st.spinner("Rendering 5-neighbor restricted smooth contours..."):
             
             fig = plt.figure(figsize=(11, 10), facecolor='#FDFDF0')
