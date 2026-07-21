@@ -128,9 +128,26 @@ if uploaded_file is not None:
             fig = plt.figure(figsize=(11, 10), facecolor='#FDFDF0')
             ax = fig.add_axes([0.1, 0.1, 0.8, 0.75], facecolor='#FDFDF0')
 
+           # Clean and convert data safely
+    df_clean = df.copy()
+    
+    # Convert lat, lon, and value columns to numeric (coerce errors to NaN)
+    df_clean[lat_col] = pd.to_numeric(df_clean[lat_col], errors='coerce')
+    df_clean[lon_col] = pd.to_numeric(df_clean[lon_col], errors='coerce')
+    df_clean[value_col] = pd.to_numeric(df_clean[value_col], errors='coerce')
+
+    # Drop any rows where lat, lon, or value is NaN so all arrays keep matching lengths
+    df_clean = df_clean.dropna(subset=[lat_col, lon_col, value_col]).copy()
+
+    if st.button("Generate Final PMD Reference Map"):
+        with st.spinner("Rendering 5-neighbor restricted smooth contours..."):
+            
+            fig = plt.figure(figsize=(11, 10), facecolor='#FDFDF0')
+            ax = fig.add_axes([0.1, 0.1, 0.8, 0.75], facecolor='#FDFDF0')
+
             x = df_clean[lon_col].values
             y = df_clean[lat_col].values
-            z = pd.to_numeric(df_clean[value_col], errors='coerce').dropna().values
+            z = df_clean[value_col].values
 
             if gdf_province is not None:
                 minx, miny, maxx, maxy = gdf_province.total_bounds
