@@ -6,4 +6,3 @@ matplotlib
 pillow
 shapely
 geopandas
-fiona
