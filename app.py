@@ -139,10 +139,7 @@ if uploaded_file is not None:
     # Drop any rows where lat, lon, or value is NaN so all arrays keep matching lengths
     df_clean = df_clean.dropna(subset=[lat_col, lon_col, value_col]).copy()
 
-            x = df_clean[lon_col].values
-            y = df_clean[lat_col].values
-            z = df_clean[value_col].values
-
+    
             if gdf_province is not None:
                 minx, miny, maxx, maxy = gdf_province.total_bounds
                 minx -= 0.5; maxx += 0.5; miny -= 0.5; maxy += 0.5
