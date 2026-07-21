@@ -6,3 +6,4 @@ matplotlib
 pillow
 shapely
 geopandas
+openpyxl
