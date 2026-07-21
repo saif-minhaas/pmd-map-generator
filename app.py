@@ -139,9 +139,6 @@ if uploaded_file is not None:
     # Drop any rows where lat, lon, or value is NaN so all arrays keep matching lengths
     df_clean = df_clean.dropna(subset=[lat_col, lon_col, value_col]).copy()
 
-            fig = plt.figure(figsize=(11, 10), facecolor='#FDFDF0')
-            ax = fig.add_axes([0.1, 0.1, 0.8, 0.75], facecolor='#FDFDF0')
-
             x = df_clean[lon_col].values
             y = df_clean[lat_col].values
             z = df_clean[value_col].values
